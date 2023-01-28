@@ -23,15 +23,29 @@ resource "google_storage_bucket" "static-site" {
 resource "kubernetes_namespace" "tenantx" {
   metadata {
     annotations = {
-      name = "tenantx"
+      name = var.namespace
     }
 
     labels = {
-      namespace = "tenantx"
+      namespace = var.namespace
     }
 
-    name = "tenantx"
+    name = var.namespace
   }
 }
 
+resource "google_dns_record_set" "tenantx" {
+  name         = "${var.namespace}.qreach.adamradvan.eu."
+  managed_zone = "adamradvan"
+  type         = "A"
+  ttl          = 300
+
+  rrdatas = ["34.141.92.169"]
+}
+/*
+resource "google_dns_managed_zone" "adamradvan" {
+  name     = "adamradvan"
+  dns_name = "adamradvan.eu."
+}
+*/
 

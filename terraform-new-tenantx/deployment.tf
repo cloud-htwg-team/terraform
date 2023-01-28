@@ -1,6 +1,6 @@
 resource "kubernetes_deployment" "qrhistory" {
   metadata {
-    name = "his-deployment"
+    name = "his-deployment-${var.namespace}"
     namespace = var.namespace
 
     labels = {

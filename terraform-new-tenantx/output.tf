@@ -10,10 +10,15 @@ output "service_account" {
 
 output "kubernetes_namespace" {
   description = "The default service account used for running nodes."
-  value       = "tenantx"
+  value       = var.namespace
 }
 
 output "google_storage_bucket" {
   description = "The default service account used for running nodes."
   value       = "qrcode-tenantx-logo"
+}
+
+output "google_dns_record_set" {
+  description = "The default service account used for running nodes."
+  value       = "${var.namespace}.qreach.adamradvan.eu."
 }
