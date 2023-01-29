@@ -54,7 +54,7 @@ resource "kubernetes_ingress_v1" "tenant_ingress" {
       }
     }
     rule {
-      host = "tenantx.qreach.adamradvan.eu"
+      host = "${var.namespace}.qreach.adamradvan.eu"
       http {
         path {
           backend {
