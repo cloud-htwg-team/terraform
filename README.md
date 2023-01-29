@@ -18,3 +18,12 @@ terraform validate
 //Create the planned ressources
 
 terraform apply
+
+# creation of a tenant
+### Terraform
+- create a service account with the right access
+- create a key for the service account
+- add the key to the terraform folder
+`terraform apply -auto-approve`
+- modify the tenant name value
+`terraform apply -var="namespace=<name input>" -auto-approve`
