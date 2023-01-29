@@ -37,10 +37,10 @@ resource "kubernetes_namespace" "tenantx" {
 resource "google_dns_record_set" "tenantx" {
   name         = "${var.namespace}.qreach.adamradvan.eu."
   managed_zone = "adamradvan"
-  type         = "A"
+  type         = "CNAME"
   ttl          = 300
 
-  rrdatas = ["34.141.92.169"]
+  rrdatas = ["tenant1.qreach.adamradvan.eu."]
 }
 /*
 resource "google_dns_managed_zone" "adamradvan" {
@@ -48,4 +48,5 @@ resource "google_dns_managed_zone" "adamradvan" {
   dns_name = "adamradvan.eu."
 }
 */
+
 

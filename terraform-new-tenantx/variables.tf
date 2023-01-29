@@ -15,9 +15,14 @@ variable "region" {
 }
 
 
-variable "port" {
+variable "porthis" {
   description = "The port to expose the service on"
   default     = "8888"
+}
+
+variable "portqr" {
+  description = "The port to expose the service on"
+  default     = "8080"
 }
 
 variable "namespace" {

@@ -22,3 +22,4 @@ output "google_dns_record_set" {
   description = "The default service account used for running nodes."
   value       = "${var.namespace}.qreach.adamradvan.eu."
 }
+
