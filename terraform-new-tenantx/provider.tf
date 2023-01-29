@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("C:/Users/33770/AppData/Roaming/gcloud/application_default_credentials.json")
+  credentials = file("application_default_credentials.json")
   project = "qrcode-374515"
   region  = "europe-west3"
   zone    = "europe-west3-a"
@@ -52,6 +52,20 @@ provider "kubernetes" {
     )
   
 }
+/*
+terraform {
+  
+  backend "gcs" {
+   bucket  = google_storage_bucket.default.name
+   prefix  = "terraform/state"
+ }
+  cloud {
+    organization = "qr-code-app"
 
-
+    workspaces {
+      name = "new-tenant"
+    }
+  }
+}
+*/
 

@@ -1,7 +1,7 @@
 resource "kubernetes_ingress_v1" "tenant_ingress" {
   metadata {
     name = "${var.namespace}-ingress"
-    namespace = var.namespace
+    namespace = kubernetes_namespace.tenantx.metadata[0].name
   }
 
   spec {

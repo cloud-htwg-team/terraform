@@ -82,5 +82,5 @@ resource "kubernetes_deployment" "qrcode" {
     }
   }
 
-  #depends_on = [module.gke]
+  #depends_on = [main.namespace]
 }

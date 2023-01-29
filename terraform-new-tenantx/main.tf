@@ -13,8 +13,20 @@ module "gke" {
   service_account        = var.compute_engine_service_account
 }
 */
+
+/*
+resource "google_storage_bucket" "default" {
+  name          = "qr-code-app-dev-terra-bucket-tfstate"
+  force_destroy = false
+  location      = "europe-west3"
+  storage_class = "STANDARD"
+  versioning {
+    enabled = true
+  }
+}
+*/
 resource "google_storage_bucket" "static-site" {
-  name          = "qrcode-tenantx-logo"
+  name          = "qrcode-${var.namespace}-logo"
   location      = "europe-west3"
   storage_class = "REGIONAL"
   force_destroy = true
@@ -41,6 +53,7 @@ resource "google_dns_record_set" "tenantx" {
   ttl          = 300
 
   rrdatas = ["tenant1.qreach.adamradvan.eu."]
+  
 }
 /*
 resource "google_dns_managed_zone" "adamradvan" {
@@ -48,5 +61,7 @@ resource "google_dns_managed_zone" "adamradvan" {
   dns_name = "adamradvan.eu."
 }
 */
+
+
 
 

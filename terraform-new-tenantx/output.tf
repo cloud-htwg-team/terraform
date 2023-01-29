@@ -15,7 +15,7 @@ output "kubernetes_namespace" {
 
 output "google_storage_bucket" {
   description = "The default service account used for running nodes."
-  value       = "qrcode-tenantx-logo"
+  value       = "qrcode-${var.namespace}-logo"
 }
 
 output "google_dns_record_set" {

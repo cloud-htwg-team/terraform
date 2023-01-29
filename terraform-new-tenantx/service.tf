@@ -1,7 +1,7 @@
 resource "kubernetes_service" "qrhistory" {
   metadata {
         name = "his-cluster-service-${var.namespace}"
-        namespace = var.namespace
+        namespace = kubernetes_namespace.tenantx.metadata[0].name
         labels = {
             maintained_by = "terraform"
             app = kubernetes_deployment.qrhistory.metadata[0].labels.app
@@ -32,7 +32,7 @@ resource "kubernetes_service" "qrhistory" {
 resource "kubernetes_service" "qrcode" {
   metadata {
         name = "qr-cluster-service-${var.namespace}"
-        namespace = var.namespace
+        namespace = kubernetes_namespace.tenantx.metadata[0].name
         labels = {
             maintained_by = "terraform"
             app = kubernetes_deployment.qrcode.metadata[0].labels.app
@@ -57,7 +57,7 @@ resource "kubernetes_service" "qrcode" {
     type = "ClusterIP"
   }
 
-  #depends_on = [module.gke]
+  
 }
 
 resource "kubernetes_service" "ext_front" {
@@ -86,4 +86,5 @@ resource "kubernetes_service" "ext_auth" {
     type = "ExternalName"
     external_name = "auth-cluster-service.default.svc.cluster.local"
   }
+  
 }
