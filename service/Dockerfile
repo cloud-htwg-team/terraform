@@ -11,6 +11,7 @@ RUN gradle build --no-daemon
 
 ### RUN Image ##
 
+
 # use JRE as JDK can be a security vulnerability; alpine is a slim version, then resulting image is 300MB smaller
 FROM eclipse-temurin:17-jre-alpine
 
