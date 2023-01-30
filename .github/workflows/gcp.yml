@@ -1,0 +1,52 @@
+---
+name: Build and Push terraform Microservice to GCR
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build-push-gcr:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: terraform-service
+      PROJECT_ID: qrcode-374515
+
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: 'actions/checkout@v3'
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/772208948259/locations/global/workloadIdentityPools/github-auth-action-pool/providers/gh-actions-auth-provider'
+        service_account: 'github-actions-qrcode@qrcode-374515.iam.gserviceaccount.com'
+
+    - name: Create Json GC Account
+      uses: jsdaniell/create-json@v1.2.2
+      with:
+        name: "application_default_credentials.json"
+        json: ${{ secrets.GOOGLE_ACC_AUTH }}
+        dir: './terraform-tenant-prod'
+
+    # - name: Cat Temporary Json
+    #   run: cat ./auth/tenant/application_default_credentials.json
+
+    # Special Build step with a custom action for passing down GitHub's secret
+    - name: Build Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: ./service
+        tags: ${{ env.IMAGE_NAME }}:latest
+
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker --quiet
+    
+    - name: Push Docker Image to GCR
+      run: |-
+        docker tag $IMAGE_NAME:latest eu.gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+        docker push eu.gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
