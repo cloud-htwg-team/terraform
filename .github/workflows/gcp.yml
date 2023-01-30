@@ -30,7 +30,7 @@ jobs:
       with:
         name: "application_default_credentials.json"
         json: ${{ secrets.GOOGLE_ACC_AUTH }}
-        dir: './terraform-tenant-prod'
+        dir: './service/terraform-tenant-prod'
 
     # - name: Cat Temporary Json
     #   run: cat ./auth/tenant/application_default_credentials.json
