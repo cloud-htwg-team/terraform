@@ -36,6 +36,9 @@ resource "kubernetes_deployment" "qrhistory" {
             port {
                container_port = var.porthis
             }
+        env {
+            name = "BUCKET_NAME"
+            value = google_storage_bucket.static-site.name
         }
     }
     
@@ -43,6 +46,7 @@ resource "kubernetes_deployment" "qrhistory" {
   }
 
   #depends_on = [module.gke]
+}
 }
 
 
@@ -84,6 +88,15 @@ resource "kubernetes_deployment" "qrcode" {
             port {
                container_port = var.portqr
             }
+        env {
+            name = "HISTORY_SERVICE_SERVER"
+            value = "his-cluster-service-${var.namespace}"
+          }
+        env {
+            name = "HISTORY_SERVICE_PORT"
+            value = "8888"
+          }         
+                        
         }
     }
     
