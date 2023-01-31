@@ -87,3 +87,17 @@ resource "kubernetes_service" "ext_auth" {
     external_name = "auth-cluster-service.default.svc.cluster.local"
   }
 }
+
+resource "kubernetes_service" "ext_ten" {
+  metadata {
+        name = "ten-service-from-${var.namespace}"
+        namespace = kubernetes_namespace.tenantx.metadata[0].name
+  }
+  spec {
+    port {
+      port = 80
+    }
+    type = "ExternalName"
+    external_name = "ten-cluster-service.default.svc.cluster.local"
+  }
+}
