@@ -27,3 +27,19 @@ terraform apply
 - `terraform apply -auto-approve`
 - modify the tenant name value
 - `terraform apply -var="namespace=<name input>" -auto-approve`
+
+# Available Endpoints
+
+### Tenants Endpoints
+
+- Apply terraforming script for tenant name
+```
+Request
+
+POST http://localhost:8084/secure/apply
+Content-Type: application/json
+{
+	"tenantName": "silver"
+}
+
+```
