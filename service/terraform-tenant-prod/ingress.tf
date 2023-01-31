@@ -82,6 +82,45 @@ resource "kubernetes_ingress_v1" "tenant_ingress" {
           path = "/login"
         
         }
+        path {
+          backend {
+            service{
+              name = "ten-service-from-${var.namespace}"
+              port {
+                number = 80
+              }
+          }
+          }
+          #path_type = "Prefix"
+          path = "/tenants"
+        
+        }
+        path {
+          backend {
+            service{
+              name = "ten-service-from-${var.namespace}"
+              port {
+                number = 80
+              }
+          }
+          }
+          #path_type = "Prefix"
+          path = "/secure/tenants"
+        
+        }
+        path {
+          backend {
+            service{
+              name = "ten-service-from-${var.namespace}"
+              port {
+                number = 80
+              }
+          }
+          }
+          #path_type = "Prefix"
+          path = "/secure/tenants/*"
+        
+        }
       }
     }
   }
