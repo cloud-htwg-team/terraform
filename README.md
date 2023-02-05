@@ -1,4 +1,22 @@
+# Terraform microservise 
+- `JAVA 17 + SpringBoot 3`
+- `terraform` commands
 
+## Usage
+
+- Apply terraforming script for tenant name
+```
+Request
+
+POST http://localhost:8084/secure/apply
+Content-Type: application/json
+{
+	"tenantName": "silver"
+}
+
+```
+## Misc
+```
 //Authenticate to the cluster
 
 gcloud container clusters get-credentials learnk8s-cluster-prod --zone europe-west3
@@ -18,8 +36,9 @@ terraform validate
 //Create the planned ressources
 
 terraform apply
+```
 
-# creation of a tenant
+## Creation of a tenant
 ### Terraform
 - create a service account with the right access
 - create a key for the service account
@@ -27,19 +46,3 @@ terraform apply
 - `terraform apply -auto-approve`
 - modify the tenant name value
 - `terraform apply -var="namespace=<name input>" -auto-approve`
-
-# Available Endpoints
-
-### Tenants Endpoints
-
-- Apply terraforming script for tenant name
-```
-Request
-
-POST http://localhost:8084/secure/apply
-Content-Type: application/json
-{
-	"tenantName": "silver"
-}
-
-```
